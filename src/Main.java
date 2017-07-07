@@ -6,7 +6,7 @@ public class Main {
         MyThreadedBinaryTree tree = new MyThreadedBinaryTree();
         int[] data = {4,2,6,1,3,5,7};
         tree.buildTree(data);
-        tree.inOrderThreading();
-        tree.inOrderTraversal();
+        tree.preOrderThreading();
+        tree.preOrderTraversal();
     }
 }

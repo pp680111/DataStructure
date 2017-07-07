@@ -81,6 +81,31 @@ public class MyThreadedBinaryTree {
         }
     }
 
+    public void preOrderThreading(){
+        preOrderThreading(root);
+    }
+    private void preOrderThreading(Node node){
+        if(node != null){
+            if(!node.lTag && node.left == null)
+            {
+                node.lTag = true;
+                node.left = pre;
+            }
+            if(pre != null && pre.right == null && !pre.rTag)
+            {
+                pre.right = node;
+                pre.rTag = true;
+            }
+            pre = node;
+
+            //因为前序遍历的话是先处理自身的然后在处理左子树和右子树的，如果设置了节点的前驱之后再去处理左子树的话就会导致无限循环，所以先判断左右子树是否指向子树，如果指向子树就对子树进行线索化
+            if(!node.lTag)
+                preOrderThreading(node.left);
+            if(!node.rTag)
+                preOrderThreading(node.right);
+        }
+    }
+
     public void inOrderTraversal(){
         Node node = root;
         while(node != null && !node.lTag){
@@ -97,6 +122,34 @@ public class MyThreadedBinaryTree {
                     node = node.left;
                 }
             }
+        }while(node != null);
+    }
+
+    public void preOrderTraversal(){
+        Node node = root;
+        while(node != null && !node.lTag)
+        {
+            System.out.print(node.element + " ");
+            node = node.left;
+        }
+        //这里是当树一路往左走到叶子节点的时候，输出最左叶子节点的
+        System.out.print(node.element + " ");
+
+        do{
+            if(node.rTag)
+            {
+                node = node.right;
+                System.out.print(node.element + " ");
+            }
+            else if(node.right != null )
+            {
+                while(node != null && !node.lTag)
+                {
+                    node = node.left;
+                    System.out.print(node.element + " ");
+                }
+            }
+            else node = null;
         }while(node != null);
     }
 }
