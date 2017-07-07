@@ -3,11 +3,10 @@
  */
 public class Main {
     public static void main(String[] args){
-        ThreadedBinaryTree tree = new ThreadedBinaryTree();
-        int[] data = {2,8,7,4,9,3,1,6,7,5};
+        MyThreadedBinaryTree tree = new MyThreadedBinaryTree();
+        int[] data = {4,2,6,1,3,5,7};
         tree.buildTree(data);
-        tree.normalInOrderTraversal();
-//        tree.inOrderThreading();
-//        tree.inOrderReaversal();
+        tree.inOrderThreading();
+        tree.inOrderTraversal();
     }
 }

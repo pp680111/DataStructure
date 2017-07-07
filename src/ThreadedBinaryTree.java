@@ -33,6 +33,9 @@ public class ThreadedBinaryTree {
             head = new Node(-1);
         }
 
+        /*
+        这个函数不难理解，就是循环数组，然后对一个数据一直寻找它能插入的地方，如果已经有节点的数据和它一样的话就跳过
+         */
         public void buildTree(int[] data){
             head = null;
             root = new Node(data[0]);
@@ -100,7 +103,7 @@ public class ThreadedBinaryTree {
                 }
                 previous = tmpNode;
                 if(previous.right == null && previous.rTag == false){
-                    previous.rTag =true;
+                    previous.rTag = true;
                     previous.right = current;
                 }
 
