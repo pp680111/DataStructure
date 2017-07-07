@@ -3,10 +3,9 @@
  */
 public class Main {
     public static void main(String[] args){
-        MyThreadedBinaryTree tree = new MyThreadedBinaryTree();
+        MorrisBinaryTree tree = new MorrisBinaryTree();
         int[] data = {4,2,6,1,3,5,7};
         tree.buildTree(data);
-        tree.preOrderThreading();
-        tree.preOrderTraversal();
+        tree.morrisInOrder();
     }
 }
