@@ -104,4 +104,108 @@ public class MorrisBinaryTree {
             }
         }
     }
+
+    public void delete(int data){
+        Node current = root;
+        Node prev = null;
+        Node toBeDeleteNode = null;
+
+        while(current != null && current.element != data){
+            prev = current;
+            if(current.element > data)
+            {
+                current = current.left;
+            }
+            else if(current.element < data)
+            {
+                current = current.right;
+            }
+        }
+
+        if(current == null)
+        {
+
+            System.out.println("找不到该节点,或者树是空的");
+            return;
+        }
+        toBeDeleteNode = current;
+
+        if(current.left != null && current.right != null)
+        {
+            Node tmpNode = current.right;
+            //在右子树里面寻找最左节点
+            while(tmpNode.left != null)
+                tmpNode = tmpNode.left;
+            //把整个被删除节点的左子树都给它
+            tmpNode.left = current.left;
+            //current指向替代被删除节点的节点
+            current = current.right;
+
+        }
+        else if(current.left == null)
+            current = current.right;
+        else
+            current = current.left;
+
+        if(toBeDeleteNode == root)
+            root = current;
+        else if(prev.left == toBeDeleteNode)
+            prev.left = current;
+        else prev.right = current;
+    }
+
+    public void copyDelete(int data)
+    {
+        Node node = root;
+        Node previous = null;
+        Node toBeDelete = null;
+
+        while(node != null && node.element != data){
+            if(node.element > data)
+            {
+                previous = node;
+                node = node.left;
+            }
+            else
+            {
+                previous = node;
+                node = node.right;
+            }
+        }
+
+        if(node == null)
+        {
+            System.out.println("树为空或树中不存在此节点");
+            return;
+        }
+
+        toBeDelete = node;
+
+        if(node.left != null && node.right != null){
+            Node tmp = node.left;
+            Node prev = node;
+
+            while(tmp.right != null)
+            {
+                prev = tmp;
+                tmp = tmp.right;
+            }
+
+            node.element = tmp.element;
+            //这里如果左子树中最右节点就是被删除节点的左子树的话，那么就把最右节点的左子树赋给被删除节点，如果不是的话就把最右子树的左子树赋给它的父节点的右子树
+            if(prev == node)
+                node.left = tmp.left;
+            else prev.right = tmp.left;
+        }
+        else if(node.left == null){
+            node = node.right;
+        }
+        else node = node.left;
+
+        if(node == root)
+            root = node;
+        else if(previous.left == toBeDelete)
+            previous.left = node;
+        else previous.right = node;
+    }
 }
